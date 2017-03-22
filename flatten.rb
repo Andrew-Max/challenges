@@ -13,7 +13,7 @@ class Flattener
   def recurse_flatten(arr)
     accumulator = []
         # output_array.concat(check_sub_array(el))
-      if arr.kind_of?(Array)
+    if arr.kind_of?(Array)
       arr.each do |arr|
         accumulator.concat(recurse_flatten(arr))
       end
@@ -27,14 +27,19 @@ end
 
 flattener = Flattener.new
 
+single_level_array = [4, 8, 1]
 four_level_array = [1, [2,3, [4, [3, 9, 3]]]]
-
 multi_type_array = [[1,2,[3, ['a' 'b', 'c'], false]],4, 'x', {name: "andrew", age: 28}]
+
+# Check that flattener doesn't hurt single level arrays.
+assert_equal(flattener.flatten(single_level_array) , [4, 8, 1])
 
 # Check that flattener can handle at least four levels of nesting
 assert_equal(flattener.flatten(four_level_array) , [1, 2, 3, 4 ,3, 9,3])
+
 # Check that flattener can handle arrays of various classes
 assert_equal(flattener.flatten(multi_type_array), [1, 2, 3, "ab", "c", false, 4, "x", {:name=>"andrew", :age=>28}])
+
 # Check that flattener will not accept arguments for flatten other than arrays
 assert_raise ArgumentError do
   flattener.flatten(3)
