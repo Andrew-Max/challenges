@@ -1,0 +1,14 @@
+* {
+	font-family: 'Oswald', sans-serif;
+}
+
+.navbar {
+	background-color: #444;
+	border: none;
+	border-radius: 0;
+}
+.navbar p {
+	margin-top: 5px;
+	font-size: 28px;
+	color: #69d8a1;
+}
