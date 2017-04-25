@@ -26,7 +26,20 @@
 }
 
 .result-container {
-	margin-top: 30px;
+	margin-top: 20px;
 	display: none;
 }
 
+.input-field {
+	width: 240px;
+	position: relative;
+}
+.input-field .close{
+	position: absolute;
+	top: 9px;
+	right: 10px;
+	font-size: 16px;
+}
+.input-field .close:hover{
+	color: red;
+}

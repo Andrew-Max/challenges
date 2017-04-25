@@ -1,16 +1,8 @@
 $( document ).ready(function() {
-    // $('.input-container button').on('click', handleBdayInput);
     initializeDatepicker();
+    $('.input-container button').on('click', handleBdayInput);
+    $('.input-container .close').on('click', handleInputReset);
 
-    $('.input-container button').on('click', function () {
-		var bdayInput = $('.input-container input').val();
-		var bdayObj = calculateMathBDay(bdayInput);
-
-		$('.result-container').show();
-		$('.result-container span.next-bday-days').html(bdayObj.dayOfNextMathBDay);
-		$('.result-container span.days-till').html(bdayObj.daysTillNextMathBDay);
-		$('.result-container span.next-bday-date').html(bdayObj.nextMathBDayDate);
-	});
 });
 
 function calculateMathBDay(date) {
@@ -26,16 +18,8 @@ function calculateMathBDay(date) {
 	dayOfNextMathBDay: dayOfNextMathBDay,
 	daysTillNextMathBDay: daysTillNextMathBDay,
 	nextMathBDayDate: nextMathBDayDate
-  }
+  };
 };
-
-// function  handleBdayInput() {
-// 	return function () {
-// 		var bdayInput = $('.input-container input').val
-// 		var bdayObj = calculateMathBDay(bdayInput);
-// 		$('.result-container span.days').html(bdayObj.dayOfNextMathBirthday)
-// 	};
-// }
 
 function initializeDatepicker() {
 	$("#datepicker").datepicker({
@@ -43,5 +27,21 @@ function initializeDatepicker() {
 	    changeYear: true,
 	    yearRange: '-110:+0'
 	});
-}
+};
+
+function handleBdayInput() {
+	var bdayInput = $('.input-container input').val();
+	var bdayObj = calculateMathBDay(bdayInput);
+
+	$('.result-container').show();
+	$('.result-container span.next-bday-days').html(bdayObj.dayOfNextMathBDay);
+	$('.result-container span.days-till').html(bdayObj.daysTillNextMathBDay);
+	$('.result-container span.next-bday-date').html(bdayObj.nextMathBDayDate);
+};
+
+function handleInputReset() {
+	$('.result-container').hide();
+	$('.input-container input').val(null);
+};
+
 

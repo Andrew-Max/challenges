@@ -23,7 +23,11 @@
 	<div class="content-body container-fluid">
 		<div class="row">
 			<div class="input-container">
-				<input type="text" class="form-control" id="datepicker" name="birthday">
+				<div class="input-field">
+					<input type="text" class="form-control" id="datepicker" name="birthday">
+					<span class="close">Reset</span>
+				</div>
+
 				<button>Submit</button>
 			</div>
 			<div class="result-container">
@@ -42,4 +46,5 @@
 
 </html>
 
-<!-- two errors: future date and submit without content -->
+<!-- bugs: future date, submit without content, moment input in console -->
+<!-- features: reset, advanced output, error handling -->
