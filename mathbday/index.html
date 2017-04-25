@@ -150,15 +150,12 @@ $( document ).ready(function() {
 //=============================
 //Data Caculation
 //=============================
-function calcReturnData(date) {
-	// turn to actual object
-	var returnObj = {};
-
-	var presetsObj = new PresetsObj(date);
-	returnObj.nextBDay = calcNextMathBDay(presetsObj);
-	returnObj.lastBDay = calcLastMathBDay(presetsObj);
-	returnObj.extras = calcExtras(presetsObj);
-	return returnObj;
+function ViewModel(date) {
+	var presets = new PresetsObj(date)
+	this.presets = presets;
+	this.nextBDay = new NextMathBDay(presets);
+	this.lastBDay = new LastMathBDay(presets);
+	this.extras = new Extras(presets);
 };
 
 function PresetsObj(rawDate) {
@@ -174,67 +171,54 @@ function PresetsObj(rawDate) {
 	}
 };
 
-function calcNextMathBDay(presetsObj) {
-  // turn to actual object
-  var nextMathBDayObj = {
-	dayOfNextMathBDay: function() {
+function NextMathBDay(presetsObj) {
+	this.dayOfNextMathBDay = function() {
 		return Math.pow(10, presetsObj.currentDaysCharLength());
 	},
-	daysTillNextMathBDay: function() {
+	this.daysTillNextMathBDay = function() {
 		return this.dayOfNextMathBDay() - presetsObj.numCurrentDays();
 	},
-	nextMathBDayDate: function() {
+	this.nextMathBDayDate = function() {
 		var nextMathBDayDate = moment().add(this.daysTillNextMathBDay(), 'days');
 		return nextMathBDayDate.format("dddd, MMMM Do YYYY");
 	}
-  };
-
-  return nextMathBDayObj;
 };
 
-function calcLastMathBDay(presetsObj) {
-	var lastMathBDayObj = {
-		dayOfLastMathBDay: function() {
-			return Math.pow(10, presetsObj.currentDaysCharLength() - 1);
-		},
-		daysSinceLastMathBDay: function() {
-			return presetsObj.numCurrentDays() - this.dayOfLastMathBDay();
-		},
-		lastMathBDayDate: function() {
-			var lastMathBDayDate = moment().subtract(this.daysSinceLastMathBDay(), 'days');
-			return lastMathBDayDate.format("dddd, MMMM Do YYYY");
-		}
-	};
-
-	return lastMathBDayObj;
-};
-
-function calcExtras(presetsObj) {
-	var extrasObj = {
-		currentDays: function() {
-			return presetsObj.numCurrentDays();
-		},
-		BDay1: function() {
-			return calcTimeDiffString(presetsObj, 1);
-		},
-		BDay10: function() {
-			return calcTimeDiffString(presetsObj, 10);
-		},
-		BDay100: function() {
-			return calcTimeDiffString(presetsObj, 100);
-		},
-		BDay1000: function() {
-			return calcTimeDiffString(presetsObj, 1000);
-		},
-		BDay10000: function() {
-			return calcTimeDiffString(presetsObj, 10000);
-		},
-		BDay100000: function() {
-			return calcTimeDiffString(presetsObj, 100000);
-		},
+function LastMathBDay(presetsObj) {
+	this.dayOfLastMathBDay = function() {
+		return Math.pow(10, presetsObj.currentDaysCharLength() - 1);
+	},
+	this.daysSinceLastMathBDay = function() {
+		return presetsObj.numCurrentDays() - this.dayOfLastMathBDay();
+	},
+	this.lastMathBDayDate = function() {
+		var lastMathBDayDate = moment().subtract(this.daysSinceLastMathBDay(), 'days');
+		return lastMathBDayDate.format("dddd, MMMM Do YYYY");
 	}
+};
 
-	return extrasObj;
+function Extras(presetsObj) {
+	this.currentDays = function() {
+		return presetsObj.numCurrentDays();
+	},
+	this.BDay1 = function() {
+		return calcTimeDiffString(presetsObj, 1);
+	},
+	this.BDay10 = function() {
+		return calcTimeDiffString(presetsObj, 10);
+	},
+	this.BDay100 = function() {
+		return calcTimeDiffString(presetsObj, 100);
+	},
+	this.BDay1000 = function() {
+		return calcTimeDiffString(presetsObj, 1000);
+	},
+	this.BDay10000 = function() {
+		return calcTimeDiffString(presetsObj, 10000);
+	},
+	this.BDay100000 = function() {
+		return calcTimeDiffString(presetsObj, 100000);
+	}
 };
 
 function calcTimeDiffString(presetsObj, bday) {
@@ -269,8 +253,8 @@ function handleBdayInput() {
 	    clearErrors();
 	}
 
-	var dataObj = calcReturnData(bdayInput);
-	updateDOM(dataObj);
+	var viewModel = new ViewModel(bdayInput);
+	updateDOM(viewModel);
 };
 
 function handleInputReset() {
@@ -303,21 +287,21 @@ function clearErrors() {
 	$('.errors-container .error').html('');
 };
 
-function updateDOM(dataObj) {
+function updateDOM(viewModel) {
 	$('.result-container').show();
-	$('.result-container span.next-bday-days').html(dataObj.nextBDay.dayOfNextMathBDay());
-	$('.result-container span.days-till').html(dataObj.nextBDay.daysTillNextMathBDay());
-	$('.result-container span.next-bday-date').html(dataObj.nextBDay.nextMathBDayDate());
-	$('.result-container span.days-old').html(dataObj.extras.currentDays());
-	$('.result-container span.last-bday-days').html(dataObj.lastBDay.dayOfLastMathBDay());
-	$('.result-container span.days-since-last').html(dataObj.lastBDay.daysSinceLastMathBDay());
-	$('.result-container span.last-bday-date').html(dataObj.lastBDay.lastMathBDayDate());
-	$('.result-container .1-day').html(dataObj.extras.BDay1());
-	$('.result-container .10-day').html(dataObj.extras.BDay10());
-	$('.result-container .100-day').html(dataObj.extras.BDay100());
-	$('.result-container .1000-day').html(dataObj.extras.BDay1000());
-	$('.result-container .10000-day').html(dataObj.extras.BDay10000());
-	$('.result-container .100000-day').html(dataObj.extras.BDay100000());
+	$('.result-container span.next-bday-days').html(viewModel.nextBDay.dayOfNextMathBDay());
+	$('.result-container span.days-till').html(viewModel.nextBDay.daysTillNextMathBDay());
+	$('.result-container span.next-bday-date').html(viewModel.nextBDay.nextMathBDayDate());
+	$('.result-container span.days-old').html(viewModel.extras.currentDays());
+	$('.result-container span.last-bday-days').html(viewModel.lastBDay.dayOfLastMathBDay());
+	$('.result-container span.days-since-last').html(viewModel.lastBDay.daysSinceLastMathBDay());
+	$('.result-container span.last-bday-date').html(viewModel.lastBDay.lastMathBDayDate());
+	$('.result-container .1-day').html(viewModel.extras.BDay1());
+	$('.result-container .10-day').html(viewModel.extras.BDay10());
+	$('.result-container .100-day').html(viewModel.extras.BDay100());
+	$('.result-container .1000-day').html(viewModel.extras.BDay1000());
+	$('.result-container .10000-day').html(viewModel.extras.BDay10000());
+	$('.result-container .100000-day').html(viewModel.extras.BDay100000());
 };	
 </script>
 
