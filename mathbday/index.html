@@ -110,7 +110,7 @@
 					<ul>
 						<li>You are <span class="days-old"></span> days old.</li>
 						<li>Your last Math Birthday was your <span class="last-bday-days"></span>-day-old birthday</li>
-						<li>Your last Math Birthday was<span class="days-since-last"></span> days ago</li>
+						<li>Your last Math Birthday was <span class="days-since-last"></span> days ago</li>
 						<li>Your Last Math Birthday was on <span class="last-bday-date"></span></li>
 						<li class="1-day"></li>
 						<li class="10-day"></li>
@@ -144,8 +144,6 @@ $( document ).ready(function() {
     $('.input-container .close').on('click', handleInputReset);
     $('.result-container button.extras-show').on('click', handleToggleExtras);
     $('.result-container button.extras-hide').on('click', handleToggleExtras);
-
-
 });
 
 
@@ -154,31 +152,26 @@ $( document ).ready(function() {
 //=============================
 function calcReturnData(date) {
 	// turn to actual object
-	var returnObj = {}
+	var returnObj = {};
 
-	var presetsObj = createPresetsObj(date);
+	var presetsObj = new PresetsObj(date);
 	returnObj.nextBDay = calcNextMathBDay(presetsObj);
 	returnObj.lastBDay = calcLastMathBDay(presetsObj);
 	returnObj.extras = calcExtras(presetsObj);
 	return returnObj;
 };
 
-function createPresetsObj(date) {
-	// turn to actual object
-	var presetsObj = {
-		date: date,
-		birthday: function() {
-			return moment(this.date, 'MM-DD-YYYY')
-		},
-		numCurrentDays: function () {
-			return moment().diff(this.birthday(), "days")
-		},
-		currentDaysCharLength: function () {
-			return this.numCurrentDays().toString().length;
-		}
-	};
-
-	return presetsObj;
+function PresetsObj(rawDate) {
+	this.date = rawDate,
+	this.birthday = function() {
+		return moment(this.date, 'MM-DD-YYYY')
+	},
+	this.numCurrentDays = function() {
+		return moment().diff(this.birthday(), "days")
+	},
+	this.currentDaysCharLength = function() {
+		return this.numCurrentDays().toString().length;
+	}
 };
 
 function calcNextMathBDay(presetsObj) {
@@ -207,7 +200,7 @@ function calcLastMathBDay(presetsObj) {
 		daysSinceLastMathBDay: function() {
 			return presetsObj.numCurrentDays() - this.dayOfLastMathBDay();
 		},
-		lastMathBDayDate: function () {
+		lastMathBDayDate: function() {
 			var lastMathBDayDate = moment().subtract(this.daysSinceLastMathBDay(), 'days');
 			return lastMathBDayDate.format("dddd, MMMM Do YYYY");
 		}
