@@ -1,5 +1,7 @@
 $( document ).ready(function() {
     // $('.input-container button').on('click', handleBdayInput);
+    initializeDatepicker();
+
     $('.input-container button').on('click', function () {
 		var bdayInput = $('.input-container input').val();
 		var bdayObj = calculateMathBDay(bdayInput);
@@ -29,5 +31,13 @@ function  handleBdayInput() {
 		var bdayObj = calculateMathBDay(bdayInput);
 		$('.result-container span.days').html(bdayObj.dayOfNextMathBirthday)
 	};
+}
+
+function initializeDatepicker() {
+	$("#datepicker").datepicker({
+	    changeMonth: true,
+	    changeYear: true,
+	    yearRange: '-110:+0'
+	});
 }
 

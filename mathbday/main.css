@@ -8,7 +8,17 @@
 	border-radius: 0;
 }
 .navbar p {
-	margin-top: 5px;
+	margin: 5px 0 0 0;
 	font-size: 28px;
 	color: #69d8a1;
 }
+
+
+.input-container {
+	margin-left: 10px;
+}
+.input-container input {
+	width: 240px;
+	margin-bottom: 10px;
+}
+
