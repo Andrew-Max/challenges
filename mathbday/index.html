@@ -20,14 +20,18 @@
 	  </div>
 	</nav>
 
-	<div class="content-body">
-		<div class="input-container">
-			<input type="text" class="form-control" id="datepicker" name="birthday">
-			<button>Submit</button>
-		</div>
-		<div class="result-container">
+	<div class="content-body container-fluid">
+		<div class="row">
+			<div class="input-container">
+				<input type="text" class="form-control" id="datepicker" name="birthday">
+				<button>Submit</button>
+			</div>
+			<div class="result-container">
+				<p>Your next math birthday is your <span class="next-bday-days"></span>-day-old birthday in <span class="days-till"></span> days on <span class="next-bday-date"></span></p>
+			</div>
 		</div>
 </body>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -37,3 +41,5 @@
 <script type="text/javascript" src="bdayCalculator.js"></script>
 
 </html>
+
+<!-- two errors: future date and submit without content -->

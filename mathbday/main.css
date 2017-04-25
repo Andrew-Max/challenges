@@ -13,12 +13,20 @@
 	color: #69d8a1;
 }
 
+.content-body {
+	margin-left: 10px;
+}
 
 .input-container {
-	margin-left: 10px;
+	margin: 10px 0 0 0;
 }
 .input-container input {
 	width: 240px;
 	margin-bottom: 10px;
+}
+
+.result-container {
+	margin-top: 30px;
+	display: none;
 }
 
