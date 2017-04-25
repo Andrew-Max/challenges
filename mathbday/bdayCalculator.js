@@ -112,7 +112,6 @@ function calcTimeDiffString(presetsObj, bday) {
 	var isBeforeBirthday = date.isBefore(moment());
 	var timeString = isBeforeBirthday ? "was " + date.fromNow() : "is " + date.fromNow();
 	return "Your " + bday.toString() + " day Math Birthday " + timeString + " on " + date.format("dddd, MMMM Do YYYY");
-		"dddd, MMMM Do YYYY";
 }
 
 //=============================
