@@ -260,6 +260,9 @@ function handleBdayInput() {
 function handleInputReset() {
 	$('.result-container').hide();
 	$('.input-container input').val(null);
+	$('.result-container button.extras-show').show();
+	$('.result-container button.extras-hide').hide();
+	$('.advanced-results').hide();
 	clearErrors();
 };
 
