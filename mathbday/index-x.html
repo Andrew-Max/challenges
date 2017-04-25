@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Math B-Day</title>
+	
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+
+ 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	      	<p>Math Birthday</p>
+	  </div>
+	</nav>
+
+	<div class="content-body container-fluid">
+		<div class="row">
+			<div class="input-container">
+				<div class="input-field">
+					<input type="text" class="form-control" id="datepicker" name="birthday">
+					<span class="close">Reset</span>
+				</div>
+
+				<button class="btn btn-primary">Submit</button>
+			</div>
+			<div class="result-container">
+				<div class="main-result">
+					<p>Your next Math Birthday is your <span class="next-bday-days"></span>-day-old birthday in <span class="days-till"></span> days on <span class="next-bday-date"></span></p>
+
+					<button class="extras-show btn">Show Advanced Math Bday Info</button>
+					<button class="extras-hide btn btn-danger">Hide Advanced Math Bday Info</button>
+				</div>
+
+				<div class="advanced-results">
+					<ul>
+						<li>You are <span class="days-old"></span> days old.</li>
+						<li>Your last Math Birthday was your <span class="last-bday-days"></span>-day-old birthday</li>
+						<li>Your last Math Birthday was<span class="days-since-last"></span> days ago</li>
+						<li>Your Last Math Birthday was on <span class="last-bday-date"></span></li>
+						<li class="1-day"></li>
+						<li class="10-day"></li>
+						<li class="100-day"></li>
+						<li class="1000-day"></li>
+						<li class="10000-day"></li>
+						<li class="100000-day"></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="errors-container">
+				<p class="error"></p>
+			</div>
+		</div>
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script type="text/javascript" src="bdayCalculator.js"></script>
+
+</html>

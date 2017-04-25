@@ -189,5 +189,3 @@ function updateDOM(dataObj) {
 	$('.result-container .10000-day').html(dataObj.extras.BDay10000());
 	$('.result-container .100000-day').html(dataObj.extras.BDay100000());
 };
-
-
