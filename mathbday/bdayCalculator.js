@@ -6,7 +6,7 @@ $( document ).ready(function() {
 });
 
 function calculateMathBDay(date) {
-  var birthday = moment(date);
+  var birthday = moment(date, 'MM-DD-YYYY');
   var numCurrentDays = moment().diff(birthday, "days");
   var currentDaysCharLength = numCurrentDays.toString().length;
   var dayOfNextMathBDay = Math.pow(10, currentDaysCharLength);
