@@ -329,3 +329,39 @@ function updateDOM(dataObj) {
 </script>
 
 </html>
+
+<!-- README 
+Some quick annotations on the design decisions here:
+
+CODE
+========
+This isn't a master piece by any means. Right off the bat I probably wouldn't use JQuery to do heavy lifting in a production app these days. If an app was complex enough to justify it I would use something like Angular/ React / Ember. For a trivial app like this, I might just try to use Native JS for DOM manipulation to keep things lightweight. And obviously throwing everything on a single page is fine for a toy project but is not a good solution for building a production application. So this isn't representative of how I'd build this in production.
+
+I did add a big chunk of functionality which was beyond the stated assignment which was the advanced data field. It did end up almost doubling the complexity of the JS. In a real work environment I understand that it is important to come to consensus on features and not just build stuff out beyond spec but here I was just having fun with it.
+
+What I did try to display here: 
+
+I Kept functions small, composable, and single purpose. I choose long descriptive variable names in a preference for readability over brevity. My main aim was to make this clean and readable despite being thrown on a single page without any large overarching architecture.
+
+The only real architectural decsion here was to create a view-model in the form of the `dataObj` which minimizes the DOM's knowledge of what is going on the JS/ Data calculations and only allows it to access a single `injected` data object. 
+
+My last concern was to make both the DOM and the JS readable. I aim to use semantic class names so the DOM is self descriptive. In the JS I used simple header comments for organization and tried to make all variable names and function names self descriptive. 
+
+UI
+=========
+
+I tried not to over the design the UI and keep simplicity and usability in mind. I pulled in a font to make the text a bit nicer and used a very simple color scheme that I though was nice looking without being distracting
+
+I was careful to make sure all UX interactions were straightforward, involved minimal effort from the user, and had smart defaults (ie: disabling future dates). I made an effort to catch invalid submissions (submit with no data) and give feedback to the user as to what was wrong and how to correct the issue.
+
+Wireframes
+===================
+
+I didn't end up producing any wireframes as requested in the project description becuase one of my major philosophies for writing code is not to invent the wheel, and in this case there were a plethora of good pre existing options. So in this sense my design work on this was not so much a whiteboarding excercise but to map out my requirements for the datepicker (simple ui, minimal clicks for year and month input, functional with touch) and then to evaluate the existing options on those criteria. I ended up finding that the api for the JQuery ui data picker was very minimal and nice to work with and met all of those requirements.
+
+
+Next Feature
+=============
+
+One thing I wanted to add was a description of how Math Birthdays work for the user because I don't think that's very clear as is. Because the header is under utilized here I would probably add a item on the left of the header that opened up a down facing tool tip on click that gave a 1-2 sentence description of what a Math Birthday is.
+-->
