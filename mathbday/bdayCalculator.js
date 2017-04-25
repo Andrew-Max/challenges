@@ -5,6 +5,9 @@ $( document ).ready(function() {
     initializeDatepicker();
     $('.input-container button').on('click', handleBdayInput);
     $('.input-container .close').on('click', handleInputReset);
+    $('.result-container button.extras-show').on('click', handleToggleExtras);
+    $('.result-container button.extras-hide').on('click', handleToggleExtras);
+
 
 });
 
@@ -48,7 +51,6 @@ function calcNextMathBDay(presetsObj) {
 		return Math.pow(10, presetsObj.currentDaysCharLength());
 	},
 	daysTillNextMathBDay: function() {
-		debugger;
 		return this.dayOfNextMathBDay() - presetsObj.numCurrentDays();
 	},
 	nextMathBDayDate: function() {
@@ -69,7 +71,7 @@ function calcLastMathBDay(presetsObj) {
 			return presetsObj.numCurrentDays() - this.dayOfLastMathBDay();
 		},
 		lastMathBDayDate: function () {
-			var lastMathBDayDate = moment().subtract(daysSinceLastMathBDay, 'days');
+			var lastMathBDayDate = moment().subtract(this.daysSinceLastMathBDay(), 'days');
 			return lastMathBDayDate.format("dddd, MMMM Do YYYY");
 		}
 	};
@@ -81,6 +83,9 @@ function calcExtras(presetsObj) {
 	var extrasObj = {
 		currentDays: function() {
 			return presetsObj.numCurrentDays();
+		},
+		BDay1: function() {
+			return calcTimeDiffString(presetsObj, 1);
 		},
 		BDay10: function() {
 			return calcTimeDiffString(presetsObj, 10);
@@ -136,23 +141,19 @@ function handleBdayInput() {
 	}
 
 	var dataObj = calcReturnData(bdayInput);
-	console.log(dataObj.extras.BDay10())
-	console.log(dataObj.extras.BDay100())
-	console.log(dataObj.extras.BDay1000())
-	console.log(dataObj.extras.BDay10000())
-	console.log(dataObj.extras.BDay100000())
-
-
-	$('.result-container').show();
-	$('.result-container span.next-bday-days').html(dataObj.dayOfNextMathBDay);
-	$('.result-container span.days-till').html(dataObj.daysTillNextMathBDay);
-	$('.result-container span.next-bday-date').html(dataObj.nextMathBDayDate);
+	updateDOM(dataObj);
 };
 
 function handleInputReset() {
 	$('.result-container').hide();
 	$('.input-container input').val(null);
 	clearErrors();
+};
+
+function handleToggleExtras() {
+	$('.advanced-results').toggle();
+	$('.result-container button.extras-show').toggle();
+	$('.result-container button.extras-hide').toggle();
 };
 
 
@@ -171,6 +172,23 @@ function throwNoInputError() {
 function clearErrors() {
 	$('.errors-container').hide();
 	$('.errors-container .error').html('');
-}
+};
+
+function updateDOM(dataObj) {
+	$('.result-container').show();
+	$('.result-container span.next-bday-days').html(dataObj.nextBDay.dayOfNextMathBDay());
+	$('.result-container span.days-till').html(dataObj.nextBDay.daysTillNextMathBDay());
+	$('.result-container span.next-bday-date').html(dataObj.nextBDay.nextMathBDayDate());
+	$('.result-container span.days-old').html(dataObj.extras.currentDays());
+	$('.result-container span.last-bday-days').html(dataObj.lastBDay.dayOfLastMathBDay());
+	$('.result-container span.days-since-last').html(dataObj.lastBDay.daysSinceLastMathBDay());
+	$('.result-container span.last-bday-date').html(dataObj.lastBDay.lastMathBDayDate());
+	$('.result-container .1-day').html(dataObj.extras.BDay1());
+	$('.result-container .10-day').html(dataObj.extras.BDay10());
+	$('.result-container .100-day').html(dataObj.extras.BDay100());
+	$('.result-container .1000-day').html(dataObj.extras.BDay1000());
+	$('.result-container .10000-day').html(dataObj.extras.BDay10000());
+	$('.result-container .100000-day').html(dataObj.extras.BDay100000());
+};
 
 

@@ -28,10 +28,30 @@
 					<span class="close">Reset</span>
 				</div>
 
-				<button>Submit</button>
+				<button class="btn btn-primary">Submit</button>
 			</div>
 			<div class="result-container">
-				<p>Your next math birthday is your <span class="next-bday-days"></span>-day-old birthday in <span class="days-till"></span> days on <span class="next-bday-date"></span></p>
+				<div class="main-result">
+					<p>Your next math birthday is your <span class="next-bday-days"></span>-day-old birthday in <span class="days-till"></span> days on <span class="next-bday-date"></span></p>
+
+					<button class="extras-show btn">Show Advanced Math Bday Info</button>
+					<button class="extras-hide btn btn-danger">Hide Advanced Math Bday Info</button>
+				</div>
+
+				<div class="advanced-results">
+					<ul>
+						<li>You are <span class="days-old"></span> days old.</li>
+						<li>Your last math birthday was your <span class="last-bday-days"></span>-day-old birthday</li>
+						<li>Your last math birthday was<span class="days-since-last"></span> days ago</li>
+						<li>Your Last Math Birthday was on <span class="last-bday-date"></span></li>
+						<li class="1-day"></li>
+						<li class="10-day"></li>
+						<li class="100-day"></li>
+						<li class="1000-day"></li>
+						<li class="10000-day"></li>
+						<li class="100000-day"></li>
+					</ul>
+				</div>
 
 			</div>
 			<div class="errors-container">

@@ -29,6 +29,19 @@
 	margin-top: 20px;
 	display: none;
 }
+.result-container button.extras-show {
+	background: #69d8a1;
+}
+.result-container button.extras-show:hover {
+	background: #19ff8d;
+}
+.result-container button.extras-hide {
+	display: none;
+}
+.advanced-results {
+	margin-top: 20px;
+	display: none;
+}
 
 .input-field {
 	width: 240px;
