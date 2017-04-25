@@ -43,3 +43,12 @@
 .input-field .close:hover{
 	color: red;
 }
+
+.errors-container {
+	display: none;
+	margin-top: 20px;
+}
+
+.errors-container .error {
+	color: red;
+}

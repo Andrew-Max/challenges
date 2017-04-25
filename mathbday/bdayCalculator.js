@@ -25,12 +25,20 @@ function initializeDatepicker() {
 	$("#datepicker").datepicker({
 	    changeMonth: true,
 	    changeYear: true,
-	    yearRange: '-110:+0'
+	    yearRange: '-110:+0',
+	    maxDate: new Date
 	});
 };
 
 function handleBdayInput() {
 	var bdayInput = $('.input-container input').val();
+
+	if(bdayInput === "") {
+	    return throwNoInputError();
+	} else {
+	    clearErrors();
+	}
+
 	var bdayObj = calculateMathBDay(bdayInput);
 
 	$('.result-container').show();
@@ -42,6 +50,17 @@ function handleBdayInput() {
 function handleInputReset() {
 	$('.result-container').hide();
 	$('.input-container input').val(null);
+	clearErrors();
 };
+
+function throwNoInputError() {
+	$('.errors-container').show();
+	$('.errors-container .error').html('Please Choose A Date Before Submitting');
+};
+
+function clearErrors() {
+	$('.errors-container').hide();
+	$('.errors-container .error').html('');
+}
 
 
